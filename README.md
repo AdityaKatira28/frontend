@@ -1,73 +1,160 @@
-# Welcome to your Lovable project
+# SecureAI - Security Investment Optimization Platform (Frontend)
 
-## Project info
+A modern React frontend for the GRC Compliance Monitoring and Security Investment Optimization platform.
 
-**URL**: https://lovable.dev/projects/64f90fa7-5989-4cd4-9b17-a0b21ba52b80
+## Features
 
-## How can I edit this code?
+- **Real-time Security Dashboard**: Live monitoring of security posture and threats
+- **Compliance Management**: Track compliance across multiple frameworks (SOC 2, HIPAA, GDPR, etc.)
+- **Budget Optimization**: AI-powered recommendations for security investments
+- **Threat Intelligence**: Advanced threat detection and analysis
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
 
-There are several ways of editing your application.
+## Technology Stack
 
-**Use Lovable**
+- **React 18**: Modern React with hooks and functional components
+- **TypeScript**: Type-safe development
+- **Vite**: Fast build tool and development server
+- **Tailwind CSS**: Utility-first CSS framework
+- **Shadcn/ui**: High-quality React components
+- **Recharts**: Data visualization and charts
+- **React Router**: Client-side routing
+- **Axios**: HTTP client for API communication
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/64f90fa7-5989-4cd4-9b17-a0b21ba52b80) and start prompting.
+## Quick Start
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 18+ and npm
+- Backend API running (see backend repository)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Local Development
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-Follow these steps:
+2. **Set up environment variables**:
+   Create a `.env` file in the root directory:
+   ```bash
+   VITE_BACKEND_URL=http://localhost:8000
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. **Start development server**:
+   ```bash
+   npm run dev
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4. **Access the application**:
+   Open http://localhost:5173 in your browser
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Production Build
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm run build
 ```
 
-**Edit a file directly in GitHub**
+The built files will be in the `dist/` directory.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Environment Variables
 
-**Use GitHub Codespaces**
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `VITE_BACKEND_URL` | Backend API URL | `https://your-backend.railway.app` |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+**Important**: Use `VITE_` prefix for environment variables in Vite projects (not `REACT_APP_`).
 
-## What technologies are used for this project?
+## Deployment
 
-This project is built with:
+### Netlify Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. **Connect your repository** to Netlify
+2. **Set build settings**:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+3. **Configure environment variables** in Netlify dashboard:
+   - `VITE_BACKEND_URL`: Your backend API URL
+4. **Deploy**
 
-## How can I deploy this project?
+### Manual Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/64f90fa7-5989-4cd4-9b17-a0b21ba52b80) and click on Share -> Publish.
+1. Build the project: `npm run build`
+2. Upload the `dist/` folder to your hosting provider
+3. Configure environment variables on your hosting platform
 
-## Can I connect a custom domain to my Lovable project?
+## API Integration
 
-Yes, you can!
+The frontend communicates with the backend through the `/api/test` endpoint for connectivity testing and other API endpoints for data retrieval.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### API Configuration
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+The API client is configured in `src/api.js`:
+
+```javascript
+const apiClient = axios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL,
+  timeout: 10000,
+});
+```
+
+## Project Structure
+
+```
+src/
+├── components/     # Reusable UI components
+├── hooks/         # Custom React hooks
+├── lib/           # Utility libraries
+├── pages/         # Page components
+├── services/      # API services
+├── App.tsx        # Main application component
+├── api.js         # API configuration
+└── main.tsx       # Application entry point
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## Troubleshooting
+
+### Common Issues
+
+1. **API Connection Errors**:
+   - Verify `VITE_BACKEND_URL` is set correctly
+   - Check that backend is running and accessible
+   - Verify CORS configuration on backend
+
+2. **Build Errors**:
+   - Clear node_modules and reinstall: `rm -rf node_modules package-lock.json && npm install`
+   - Check for TypeScript errors: `npm run build`
+
+3. **Environment Variables Not Working**:
+   - Ensure variables start with `VITE_` prefix
+   - Restart development server after changing .env
+   - Check that .env file is in project root
+
+### Getting Help
+
+- Check the browser console for error messages
+- Verify network requests in browser dev tools
+- Ensure backend API is responding correctly
+
