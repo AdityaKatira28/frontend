@@ -4,7 +4,6 @@
   
   # frontend/netlify.toml
 [build]
-[build]
   command = "npx update-browserslist-db@latest && npm run build"
   publish = "build"
   
