@@ -19,6 +19,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
+      outDir: "build",  // Moved this to the correct location
       rollupOptions: {
         external: ["gsap"],
       },

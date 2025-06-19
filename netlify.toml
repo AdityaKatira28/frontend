@@ -5,7 +5,7 @@
   # frontend/netlify.toml
 [build]
   command = "npx update-browserslist-db@latest && npm run build"
-  publish = "build"
+  publish = "dist"
   
   [[redirects]]
   from = "/api/*"
