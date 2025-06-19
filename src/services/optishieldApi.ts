@@ -1,7 +1,31 @@
-
 import { toast } from "@/hooks/use-toast";
 
-// Enhanced mock threat data with real-world scenarios
+// API Base URL - Update this to point to your Railway backend
+const API_BASE_URL = "https://backend-production-6b38.up.railway.app";
+
+// Helper function to make API calls
+const apiCall = async (endpoint: string, options: RequestInit = {}) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error(`API call failed for ${endpoint}:`, error);
+    throw error;
+  }
+};
+
+// Enhanced mock threat data with real-world scenarios (fallback)
 const threatData = [
   { 
     threat_id: "T001", 
@@ -50,7 +74,7 @@ const threatData = [
   }
 ];
 
-// Enhanced CVE data with current vulnerabilities
+// Enhanced CVE data with current vulnerabilities (fallback)
 const cveData = [
   { 
     cve_id: "CVE-2024-12345", 
@@ -100,6 +124,45 @@ const generateRealtimeAlerts = () => {
 export const analyzeThreatData = async () => {
   try {
     console.log("Analyzing threat data...");
+    
+    // Try to get real data from backend first
+    try {
+      const threats = await apiCall('/api/threats');
+      const stats = await apiCall('/api/stats');
+      
+      if (threats && threats.length > 0) {
+        const criticalThreats = threats.filter((t: any) => t.severity === "Critical");
+        const highThreats = threats.filter((t: any) => t.severity === "High");
+        const totalImpact = threats.reduce((sum: number, t: any) => sum + (t.cost_impact || 0), 0);
+        
+        return {
+          threats: threats.map((t: any) => t.threat_id || t.id),
+          severity: criticalThreats.length > 0 ? "CRITICAL" : highThreats.length > 0 ? "HIGH" : "MEDIUM",
+          confidence: 0.9,
+          totalImpact,
+          threatBreakdown: {
+            critical: criticalThreats.length,
+            high: highThreats.length,
+            medium: threats.filter((t: any) => t.severity === "Medium").length,
+            low: threats.filter((t: any) => t.severity === "Low").length
+          },
+          topThreats: threats
+            .sort((a: any, b: any) => (b.cost_impact || 0) - (a.cost_impact || 0))
+            .slice(0, 3)
+            .map((t: any) => ({
+              type: t.threat_type || t.type,
+              impact: t.cost_impact || 0,
+              confidence: t.confidence || 0.8
+            })),
+          realtimeAlerts: generateRealtimeAlerts(),
+          stats
+        };
+      }
+    } catch (apiError) {
+      console.log("API call failed, using fallback data:", apiError);
+    }
+    
+    // Fallback to mock data
     await new Promise(resolve => setTimeout(resolve, 800));
     
     const criticalThreats = threatData.filter(t => t.severity === "critical");
@@ -143,6 +206,42 @@ export const analyzeThreatData = async () => {
 export const optimizeBudget = async (budget: number) => {
   try {
     console.log(`Optimizing budget: $${budget}`);
+    
+    // Try to get real budget recommendations from backend
+    try {
+      const recommendations = await apiCall('/api/budget-recommendations');
+      if (recommendations && recommendations.length > 0) {
+        // Process backend recommendations
+        const totalRecommended = recommendations.reduce((sum: number, rec: any) => sum + (rec.cost || 0), 0);
+        const scaleFactor = budget / totalRecommended;
+        
+        const allocations: { [key: string]: number } = {};
+        recommendations.forEach((rec: any) => {
+          const key = rec.category || rec.name || 'Other';
+          allocations[key] = Math.round((rec.cost || 0) * scaleFactor);
+        });
+        
+        const totalCost = Object.values(allocations).reduce((sum, val) => sum + val, 0);
+        const roi = totalCost > 0 ? (8500000 - totalCost) / totalCost : 0;
+        
+        return {
+          budget,
+          allocations,
+          roi,
+          threatJustification: recommendations.reduce((acc: any, rec: any) => {
+            const key = rec.category || rec.name || 'Other';
+            acc[key] = rec.justification || "Backend recommendation";
+            return acc;
+          }, {}),
+          riskReduction: Math.min(0.85, (totalCost / 300000) * 0.7 + 0.15),
+          costAvoidance: 8500000 * 0.8
+        };
+      }
+    } catch (apiError) {
+      console.log("Budget API call failed, using fallback logic:", apiError);
+    }
+    
+    // Fallback logic
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     // Threat-driven allocation logic
@@ -203,6 +302,37 @@ export const optimizeBudget = async (budget: number) => {
 export const processQuery = async (query: string) => {
   try {
     console.log(`Processing query: ${query}`);
+    
+    // Try to get AI insights from backend
+    try {
+      const insights = await apiCall('/api/ai-insights');
+      if (insights && insights.recommendations) {
+        // Use backend AI insights to enhance response
+        const sanitizedQuery = query.replace(/;/g, "").replace(/--/g, "");
+        const lowerQuery = sanitizedQuery.toLowerCase();
+        
+        // Find relevant recommendation
+        const relevantRec = insights.recommendations.find((rec: any) => 
+          lowerQuery.includes(rec.title?.toLowerCase()) || 
+          lowerQuery.includes(rec.description?.toLowerCase())
+        );
+        
+        if (relevantRec) {
+          return {
+            query: sanitizedQuery,
+            answer: `${relevantRec.description} ${relevantRec.action}`,
+            confidence: 0.95,
+            threatContext: "Response based on real-time backend AI analysis",
+            timestamp: new Date().toISOString(),
+            backendData: insights
+          };
+        }
+      }
+    } catch (apiError) {
+      console.log("AI insights API call failed, using fallback:", apiError);
+    }
+    
+    // Fallback logic
     await new Promise(resolve => setTimeout(resolve, 900));
     
     const sanitizedQuery = query.replace(/;/g, "").replace(/--/g, "");
@@ -273,3 +403,35 @@ export const getLiveThreatFeeds = () => {
     coverage: "Global threat landscape with industry-specific intelligence"
   };
 };
+
+// New function to get GRC dashboard data
+export const getGRCDashboardData = async () => {
+  try {
+    const dashboard = await apiCall('/api/dashboard');
+    return dashboard;
+  } catch (error) {
+    console.error("Failed to fetch GRC dashboard data:", error);
+    // Return fallback data
+    return {
+      total_checks: 50,
+      compliant: 38,
+      non_compliant: 12,
+      critical_count: 1,
+      framework_scores: {
+        "SOC 2": 66.7,
+        "HIPAA": 75.0,
+        "GDPR": 71.4,
+        "PCI-DSS": 100.0,
+        "NIST": 85.7,
+        "ISO 27001": 75.0
+      },
+      provider_stats: {
+        "AWS": { total: 20, compliant: 15, critical: 0 },
+        "Azure": { total: 15, compliant: 12, critical: 1 },
+        "GCP": { total: 15, compliant: 11, critical: 0 }
+      },
+      recent_violations: []
+    };
+  }
+};
+
