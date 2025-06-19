@@ -1,7 +1,7 @@
 import { toast } from "@/hooks/use-toast";
 
 // API Base URL - Update this to point to your Railway backend
-const API_BASE_URL = "https://backend-production-6b38.up.railway.app";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://backend-production-6b38.up.railway.app";
 
 // Helper function to make API calls
 const apiCall = async (endpoint: string, options: RequestInit = {}) => {

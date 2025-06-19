@@ -1,13 +1,13 @@
 # frontend/netlify.toml
-[build.environment]
-  REACT_APP_BACKEND_URL = "https://backend-production-6b38.up.railway.app" 
-  
-  # frontend/netlify.toml
+
 [build]
   command = "npm run build"
-  publish = "build"
-  
-  [[redirects]]
+  publish = "dist"
+
+[build.environment]
+  VITE_BACKEND_URL = "https://backend-production-6b38.up.railway.app"
+
+[[redirects]]
   from = "/api/*"
   to = "https://backend-production-6b38.up.railway.app/api/:splat"
   status = 200
