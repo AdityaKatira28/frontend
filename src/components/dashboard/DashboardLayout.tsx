@@ -1,13 +1,12 @@
 
 import React, { useState } from 'react';
-import { Sidebar } from '@/components/dashboard/Sidebar';
+import Sidebar from '@/components/dashboard/sidebar';
 import { Header } from '@/components/dashboard/Header';
 import { OverviewDashboard } from '@/components/dashboard/OverviewDashboard';
 import { ThreatDashboard } from '@/components/dashboard/ThreatDashboard';
 import BudgetOptimizationDashboard from '@/components/dashboard/BudgetOptimizationDashboard';
 import { ComplianceDashboard } from '@/components/dashboard/ComplianceDashboard';
 import { Toaster } from "@/components/ui/toaster";
-import Sidebar from '@/components/dashboard/Sidebar';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
