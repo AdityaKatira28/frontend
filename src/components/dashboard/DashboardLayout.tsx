@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { Header } from '@/components/dashboard/Header';
@@ -11,7 +12,7 @@ interface DashboardLayoutProps {
 }
 
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
-  const [activeView, setActiveView] = useState<'overview' | 'threats' | 'budget' | 'recommendations' | 'grc_dashboard'>('overview');
+  const [activeView, setActiveView] = useState<'overview' | 'threats' | 'budget' | 'recommendations'>('overview');
 
   const handleToggleAssistant = () => {
     console.log('AI Assistant toggled');
@@ -26,8 +27,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
         return <ThreatDashboard />;
       case 'budget':
         return <BudgetOptimizationDashboard />;
-      case 'grc_dashboard':
-        return <iframe src="/grc_dashboard.html" style={{ width: '100%', height: '100%', border: 'none' }} title="GRC Compliance Dashboard"></iframe>;
       default:
         return <OverviewDashboard />;
     }
@@ -46,5 +45,3 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
     </div>
   );
 };
-
-

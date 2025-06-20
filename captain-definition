@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "dockerFile": "Dockerfile",
+  "build": {
+    "context": "./",
+    "dockerfile": "Dockerfile"
+  },
+  "deploy": [
+    {
+      "imageName": "adityakatira28/ui",
+      "containerName": "ui-app",
+      "containerHttpPort": "3000",
+      "containerExposedPort": "80",
+      "envVars": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "PORT",
+          "value": "3000"
+        }
+      ],
+      "volumes": [
+        {
+          "containerPath": "/app/public",
+          "hostPath": "/opt/app-data/public"
+        }
+      ],
+      "dockerRunExtraArgs": [
+        "--restart=unless-stopped"
+      ]
+    }
+  ]
+}
