@@ -1,73 +1,287 @@
-# Welcome to your Lovable project
+# CyberWise AI Advisor 2.0
 
-## Project info
+> **Modular Security Investment Platform** - AI-powered threat analysis and budget optimization
 
-**URL**: https://lovable.dev/projects/64f90fa7-5989-4cd4-9b17-a0b21ba52b80
+## 🚀 Overview
 
-## How can I edit this code?
+CyberWise AI Advisor is a comprehensive security investment platform that provides real-time threat intelligence, budget optimization, and security posture analysis. The platform has been transformed into a modular architecture supporting multiple specialized applications.
 
-There are several ways of editing your application.
+## 🏗️ Architecture
 
-**Use Lovable**
+### Modular App Structure
+- **Overview Dashboard** - Security metrics and real-time monitoring
+- **Threat Intelligence** - AI-powered threat analysis and global monitoring  
+- **Budget Optimization** - Threat-driven security investment recommendations
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/64f90fa7-5989-4cd4-9b17-a0b21ba52b80) and start prompting.
+### Future Applications (Planned)
+- Vulnerability Scanner
+- Incident Response
+- Compliance Tracker
+- Security Training
+- Reporting Analytics
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Technology Stack
 
-**Use your preferred IDE**
+- **Frontend**: React 18 + TypeScript + Vite
+- **UI Framework**: Tailwind CSS + shadcn/ui
+- **Charts**: Recharts
+- **Routing**: React Router v6
+- **State Management**: React Query
+- **Backend**: Railway (https://backend-production-6b38.up.railway.app)
+- **Build Tool**: Vite
+- **Package Manager**: npm
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 📁 Project Structure
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+src/
+├── apps/                    # Individual applications
+│   ├── overview/           # Overview Dashboard
+│   ├── threat-intelligence/ # Threat Intelligence
+│   └── budget-optimization/ # Budget Optimization
+├── shared/                 # Shared components & utilities
+│   ├── components/         # Reusable UI components
+│   ├── services/          # API clients & services
+│   ├── hooks/             # Custom React hooks
+│   ├── utils/             # Utility functions
+│   └── types/             # TypeScript definitions
+├── layout/                # Layout components
+├── routes/                # Routing configuration
+├── config/                # App configuration
+└── assets/                # Static assets
 ```
 
-**Edit a file directly in GitHub**
+## 🚀 Quick Start
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Prerequisites
+- Node.js 18+ 
+- npm 8+
 
-**Use GitHub Codespaces**
+### Installation
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/AdityaKatira28/cyberwise-ai-advisor02.git
+   cd cyberwise-ai-advisor02
+   ```
 
-## What technologies are used for this project?
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-This project is built with:
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+4. **Open in browser**
+   ```
+   http://localhost:8080
+   ```
 
-## How can I deploy this project?
+### Build for Production
 
-Simply open [Lovable](https://lovable.dev/projects/64f90fa7-5989-4cd4-9b17-a0b21ba52b80) and click on Share -> Publish.
+```bash
+npm run build
+npm run preview
+```
 
-## Can I connect a custom domain to my Lovable project?
+## 🎯 Features
 
-Yes, you can!
+### Overview Dashboard (`/overview`)
+- **Security Metrics**: Real-time security score and KPIs
+- **Threat Landscape**: Visual threat severity analysis
+- **Budget Allocation**: Current security investment breakdown
+- **Recent Alerts**: Latest security incidents and notifications
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Threat Intelligence (`/threat-intelligence`)
+- **Active Threats**: Real-time threat monitoring (23 active)
+- **Global Coverage**: Worldwide threat tracking (47 countries)
+- **Threat Timeline**: Historical threat activity analysis
+- **Threat Map**: Interactive global threat visualization
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Budget Optimization (`/budget-optimization`)
+- **AI-Powered Allocation**: Threat-driven budget recommendations
+- **Scenario Analysis**: Budget impact modeling
+- **AI Query Interface**: Natural language budget insights
+- **ROI Analysis**: Investment return calculations
+
+## 🔧 Configuration
+
+### Environment Variables
+```typescript
+// src/config/environment.ts
+export const ENV = {
+  API_BASE_URL: 'https://backend-production-6b38.up.railway.app',
+  API_TIMEOUT: 10000,
+  IS_DEV: import.meta.env.DEV,
+  IS_PROD: import.meta.env.PROD
+};
+```
+
+### App Registry
+```typescript
+// src/config/apps.ts
+export const APP_REGISTRY = [
+  {
+    id: 'overview',
+    name: 'Overview',
+    path: '/overview',
+    icon: BarChart3,
+    description: 'System overview and dashboard'
+  },
+  // ... other apps
+];
+```
+
+## 🧩 Adding New Applications
+
+1. **Create app structure**
+   ```bash
+   mkdir -p src/apps/new-app/{components,pages,services,hooks,types,utils}
+   ```
+
+2. **Add to app registry**
+   ```typescript
+   // src/config/apps.ts
+   {
+     id: 'new-app',
+     name: 'New App',
+     path: '/new-app',
+     icon: YourIcon,
+     description: 'App description'
+   }
+   ```
+
+3. **Create app entry point**
+   ```typescript
+   // src/apps/new-app/index.tsx
+   const NewApp = () => (
+     <Routes>
+       <Route path="/" element={<MainPage />} />
+     </Routes>
+   );
+   ```
+
+4. **Add route**
+   ```typescript
+   // src/routes/AppRoutes.tsx
+   <Route path="/new-app/*" element={<NewApp />} />
+   ```
+
+## 🔌 API Integration
+
+### Railway Backend
+The platform integrates with a Railway-hosted backend for:
+- Threat data analysis
+- Budget optimization algorithms
+- User authentication
+- Real-time security metrics
+
+### API Client
+```typescript
+// src/shared/services/api.ts
+export const apiClient = axios.create({
+  baseURL: ENV.API_BASE_URL,
+  timeout: ENV.API_TIMEOUT
+});
+```
+
+## 🎨 UI Components
+
+Built with **shadcn/ui** components:
+- Cards, Buttons, Inputs
+- Charts and Visualizations  
+- Tables and Data Display
+- Navigation and Layout
+- Forms and Validation
+
+## 📊 Data Visualization
+
+- **Recharts**: Interactive charts and graphs
+- **Custom Visualizations**: Threat maps and security metrics
+- **Real-time Updates**: Live data streaming
+- **Responsive Design**: Mobile and desktop optimized
+
+## 🔒 Security Features
+
+- **Authentication**: JWT-based user authentication
+- **Authorization**: Role-based access control
+- **API Security**: Request/response interceptors
+- **Data Validation**: Input sanitization and validation
+
+## 🚀 Performance
+
+- **Code Splitting**: App-based lazy loading
+- **Bundle Optimization**: Vite build optimization
+- **Caching**: API response caching
+- **Hot Reload**: Fast development experience
+
+## 📱 Responsive Design
+
+- **Mobile First**: Optimized for all screen sizes
+- **Touch Support**: Mobile-friendly interactions
+- **Progressive Enhancement**: Graceful degradation
+
+## 🧪 Testing
+
+```bash
+# Run tests
+npm run test
+
+# Run linting
+npm run lint
+
+# Type checking
+npm run type-check
+```
+
+## 📈 Monitoring
+
+- **Error Tracking**: Built-in error boundaries
+- **Performance Metrics**: Core Web Vitals tracking
+- **User Analytics**: Usage pattern analysis
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- **Documentation**: See [TRANSFORMATION_GUIDE.md](TRANSFORMATION_GUIDE.md)
+- **Issues**: GitHub Issues
+- **Email**: support@cyberwise.ai
+
+## 🎯 Roadmap
+
+### Phase 1 (Completed) ✅
+- [x] Modular architecture transformation
+- [x] Three core applications
+- [x] Shared component library
+- [x] Railway backend integration
+
+### Phase 2 (Planned)
+- [ ] Vulnerability Scanner app
+- [ ] Incident Response app
+- [ ] Advanced AI features
+- [ ] Mobile application
+
+### Phase 3 (Future)
+- [ ] Compliance Tracker app
+- [ ] Security Training app
+- [ ] Reporting Analytics app
+- [ ] Enterprise features
+
+---
+
+**CyberWise AI Advisor** - Transforming cybersecurity investment through AI-powered insights.
+
