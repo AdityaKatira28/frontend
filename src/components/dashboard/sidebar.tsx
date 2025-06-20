@@ -1,11 +1,10 @@
-
 import React from 'react';
-import { Shield, BarChart3, AlertTriangle, Target, Bot } from 'lucide-react';
+import { Shield, BarChart3, AlertTriangle, Target, Bot, CheckSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SidebarProps {
   activeView: string;
-  setActiveView: (view: 'overview' | 'threats' | 'budget' | 'recommendations') => void;
+  setActiveView: (view: 'overview' | 'threats' | 'budget' | 'recommendations' | 'grc_dashboard') => void;
 }
 
 export const Sidebar = ({ activeView, setActiveView }: SidebarProps) => {
@@ -13,6 +12,7 @@ export const Sidebar = ({ activeView, setActiveView }: SidebarProps) => {
     { id: 'overview', label: 'Overview', icon: BarChart3 },
     { id: 'threats', label: 'Threat Intelligence', icon: AlertTriangle },
     { id: 'budget', label: 'Budget Optimization', icon: Target },
+    { id: 'grc_dashboard', label: 'GRC Compliance', icon: CheckSquare },
   ];
 
   return (
@@ -50,3 +50,4 @@ export const Sidebar = ({ activeView, setActiveView }: SidebarProps) => {
     </div>
   );
 };
+
