@@ -12,11 +12,11 @@ CyberWise AI Advisor is a comprehensive security investment platform that provid
 - **Overview Dashboard** - Security metrics and real-time monitoring
 - **Threat Intelligence** - AI-powered threat analysis and global monitoring  
 - **Budget Optimization** - Threat-driven security investment recommendations
+- **Compliance Tracker** - Real-time compliance monitoring and AI insights
 
 ### Future Applications (Planned)
 - Vulnerability Scanner
 - Incident Response
-- Compliance Tracker
 - Security Training
 - Reporting Analytics
 
@@ -38,7 +38,8 @@ src/
 ├── apps/                    # Individual applications
 │   ├── overview/           # Overview Dashboard
 │   ├── threat-intelligence/ # Threat Intelligence
-│   └── budget-optimization/ # Budget Optimization
+│   ├── budget-optimization/ # Budget Optimization
+│   └── compliance-tracker/ # Compliance Tracker
 ├── shared/                 # Shared components & utilities
 │   ├── components/         # Reusable UI components
 │   ├── services/          # API clients & services
@@ -106,6 +107,13 @@ npm run preview
 - **Scenario Analysis**: Budget impact modeling
 - **AI Query Interface**: Natural language budget insights
 - **ROI Analysis**: Investment return calculations
+
+### Compliance Tracker (`/compliance-tracker`)
+- **Real-time Monitoring**: Live compliance status across frameworks
+- **Framework Scores**: SOC2, GDPR, HIPAA, PCI-DSS, ISO27001 tracking
+- **Provider Statistics**: Multi-cloud compliance monitoring (AWS, Azure, GCP)
+- **AI Insights**: Automated violation detection and recommendations
+- **Recent Violations**: Latest compliance issues with risk scoring
 
 ## 🔧 Configuration
 
@@ -265,9 +273,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Phase 1 (Completed) ✅
 - [x] Modular architecture transformation
-- [x] Three core applications
+- [x] Four core applications (Overview, Threat Intelligence, Budget Optimization, Compliance Tracker)
 - [x] Shared component library
 - [x] Railway backend integration
+- [x] Real-time compliance monitoring
 
 ### Phase 2 (Planned)
 - [ ] Vulnerability Scanner app
@@ -276,10 +285,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [ ] Mobile application
 
 ### Phase 3 (Future)
-- [ ] Compliance Tracker app
 - [ ] Security Training app
 - [ ] Reporting Analytics app
 - [ ] Enterprise features
+- [ ] Advanced compliance automation
 
 ---
 

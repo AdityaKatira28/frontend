@@ -1,4 +1,4 @@
-import { BarChart3, AlertTriangle, Target } from 'lucide-react';
+import { BarChart3, AlertTriangle, Target, Shield } from 'lucide-react';
 import { lazy } from 'react';
 
 export interface AppConfig {
@@ -14,6 +14,7 @@ export interface AppConfig {
 const OverviewApp = lazy(() => import('../apps/overview'));
 const ThreatIntelligenceApp = lazy(() => import('../apps/threat-intelligence'));
 const BudgetOptimizationApp = lazy(() => import('../apps/budget-optimization'));
+const ComplianceTrackerApp = lazy(() => import('../apps/compliance-tracker'));
 
 export const APP_REGISTRY: AppConfig[] = [
   {
@@ -39,11 +40,18 @@ export const APP_REGISTRY: AppConfig[] = [
     icon: Target,
     description: 'Cost analysis and optimization',
     component: () => import('../apps/budget-optimization')
+  },
+  {
+    id: 'compliance-tracker',
+    name: 'Compliance Tracker',
+    path: '/compliance-tracker',
+    icon: Shield,
+    description: 'Real-time compliance monitoring',
+    component: () => import('../apps/compliance-tracker')
   }
   // Future apps will be added here:
   // - vulnerability-scanner
   // - incident-response
-  // - compliance-tracker
   // - security-training
   // - reporting-analytics
 ];

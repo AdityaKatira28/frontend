@@ -7,6 +7,7 @@ import { LoadingSpinner } from '../shared/components/common/LoadingSpinner';
 const OverviewApp = React.lazy(() => import('../apps/overview'));
 const ThreatIntelligenceApp = React.lazy(() => import('../apps/threat-intelligence'));
 const BudgetOptimizationApp = React.lazy(() => import('../apps/budget-optimization'));
+const ComplianceTrackerApp = React.lazy(() => import('../apps/compliance-tracker'));
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ export const AppRoutes: React.FC = () => {
         <Route path="/overview/*" element={<OverviewApp />} />
         <Route path="/threat-intelligence/*" element={<ThreatIntelligenceApp />} />
         <Route path="/budget-optimization/*" element={<BudgetOptimizationApp />} />
+        <Route path="/compliance-tracker/*" element={<ComplianceTrackerApp />} />
         
         {/* Future app routes will be added here automatically */}
         
