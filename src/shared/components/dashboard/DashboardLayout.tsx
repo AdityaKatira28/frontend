@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
-import { Sidebar } from '@/components/dashboard/Sidebar';
-import { Header } from '@/components/dashboard/Header';
-import { OverviewDashboard } from '@/components/dashboard/OverviewDashboard';
-import { ThreatDashboard } from '@/components/dashboard/ThreatDashboard';
-import BudgetOptimizationDashboard from '@/components/dashboard/BudgetOptimizationDashboard';
-import { Toaster } from "@/components/ui/toaster";
+import { Sidebar } from './Sidebar';
+import { Header } from './Header';
+import { OverviewDashboard } from '../../apps/overview/components/OverviewDashboard';
+import { ThreatDashboard } from '../../apps/threat/components/ThreatDashboard';
+import BudgetOptimizationDashboard from '../../apps/budget/components/BudgetOptimizationDashboard';
+import { Toaster } from "@shared/components/sonner";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;

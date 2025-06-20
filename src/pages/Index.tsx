@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
+import { DashboardLayout } from '@shared/components/dashboard/DashboardLayout';
 
 const Index = () => {
   return <DashboardLayout />;

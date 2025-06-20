@@ -1,16 +1,21 @@
-
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Slider } from "@/components/ui/slider";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { toast } from "@/hooks/use-toast";
+import React, { useState, useEffect, useCallback } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@shared/components/card";
+import { Slider } from "@shared/components/slider";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@shared/components/tabs";
+import { Badge } from "@shared/components/badge";
+import { Input } from "@shared/components/input";
+import { Button } from "@shared/components/button";
+import { Skeleton } from "@shared/components/skeleton";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "@/hooks/use-toast";
 import { analyzeThreatData, optimizeBudget, processQuery } from "@/services/optishieldApi";
 import { AlertTriangle, Shield, DollarSign, TrendingUp, Target } from "lucide-react";
+
+// Import types
+import { ThreatData, BudgetData, QueryResult, LoadingState } from "../types";
+
+// Import mock data for development
+import { mockThreatData, mockBudgetData } from "@/data/mockData";
 
 export const BudgetOptimizationDashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
