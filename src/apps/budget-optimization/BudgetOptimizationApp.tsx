@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/shared/components/ui
 import { Badge } from "@/shared/components/ui/badge";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
-import { toast } from "@/shared/hooks/hooks/use-toast";
+import { toast } from "@/shared/hooks/use-toast";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { analyzeThreatData, optimizeBudget, processQuery } from "@/core/services/optishieldApi";
