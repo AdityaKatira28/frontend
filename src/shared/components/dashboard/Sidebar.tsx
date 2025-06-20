@@ -1,19 +1,17 @@
-
 import React from 'react';
-import { Shield, BarChart3, AlertTriangle, Target, Bot } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Shield } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { apps } from '@/apps/registry';
 
 interface SidebarProps {
-  activeView: string;
-  setActiveView: (view: 'overview' | 'threats' | 'budget' | 'recommendations') => void;
+  currentPath: string;
 }
 
-export const Sidebar = ({ activeView, setActiveView }: SidebarProps) => {
-  const menuItems = [
-    { id: 'overview', label: 'Overview', icon: BarChart3 },
-    { id: 'threats', label: 'Threat Intelligence', icon: AlertTriangle },
-    { id: 'budget', label: 'Budget Optimization', icon: Target },
-  ];
+export const Sidebar: React.FC<SidebarProps> = ({ currentPath }) => {
+  const isActive = (path: string) => {
+    return currentPath.startsWith(path);
+  };
 
   return (
     <div className="w-64 bg-slate-900 border-r border-slate-800 flex-shrink-0">
@@ -27,22 +25,24 @@ export const Sidebar = ({ activeView, setActiveView }: SidebarProps) => {
         </div>
         
         <nav className="space-y-2">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
+          {apps.map((app) => {
+            const Icon = app.icon;
+            const isItemActive = isActive(app.path);
+            
             return (
-              <button
-                key={item.id}
-                onClick={() => setActiveView(item.id as any)}
+              <Link
+                key={app.id}
+                to={app.path}
                 className={cn(
                   "w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200",
-                  activeView === item.id
+                  isItemActive
                     ? "bg-purple-600 text-white shadow-lg"
                     : "text-slate-300 hover:bg-slate-800 hover:text-white"
                 )}
               >
                 <Icon className="h-5 w-5" />
-                {item.label}
-              </button>
+                {app.label}
+              </Link>
             );
           })}
         </nav>

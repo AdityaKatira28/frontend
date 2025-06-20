@@ -1,13 +1,17 @@
 
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import React, { Suspense } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/card';
 import { AlertTriangle, Globe, Shield, Target } from 'lucide-react';
-import { ThreatMapVisualization } from './visualizations/ThreatMapVisualization';
-import { ThreatTimelineChart } from './charts/ThreatTimelineChart';
+import { ThreatDashboardSkeleton } from './ThreatDashboardSkeleton';
 
-export const ThreatDashboard = () => {
+// Lazy load the components
+const ThreatMapVisualization = React.lazy(() => import('./visualizations/ThreatMapVisualization'));
+const ThreatTimelineChart = React.lazy(() => import('./charts/ThreatTimelineChart'));
+
+const ThreatDashboard: React.FC = () => {
   return (
-    <div className="space-y-6 animate-fade-in">
+    <Suspense fallback={<ThreatDashboardSkeleton />}>
+      <div className="space-y-6 animate-fade-in">
       <div>
         <h1 className="text-3xl font-bold text-white">Threat Intelligence</h1>
         <p className="text-slate-400 mt-1">Real-time threat monitoring and analysis</p>
@@ -73,6 +77,9 @@ export const ThreatDashboard = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
+      </div>
+    </Suspense>
   );
 };
+
+export default ThreatDashboard;
