@@ -1,18 +1,17 @@
-
 import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Slider } from "@/components/ui/slider";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { toast } from "@/hooks/use-toast";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card";
+import { Slider } from "@/shared/components/ui/slider";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/shared/components/ui/tabs";
+import { Badge } from "@/shared/components/ui/badge";
+import { Input } from "@/shared/components/ui/input";
+import { Button } from "@/shared/components/ui/button";
+import { toast } from "@/shared/hooks/hooks/use-toast";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-import { Skeleton } from "@/components/ui/skeleton";
-import { analyzeThreatData, optimizeBudget, processQuery } from "@/services/optishieldApi";
+import { Skeleton } from "@/shared/components/ui/skeleton";
+import { analyzeThreatData, optimizeBudget, processQuery } from "@/core/services/optishieldApi";
 import { AlertTriangle, Shield, DollarSign, TrendingUp, Target } from "lucide-react";
 
-export const BudgetOptimizationDashboard = () => {
+export const BudgetOptimizationApp = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [budget, setBudget] = useState(250000);
   const [query, setQuery] = useState("");
@@ -484,4 +483,4 @@ export const BudgetOptimizationDashboard = () => {
   );
 };
 
-export default BudgetOptimizationDashboard;
+export default BudgetOptimizationApp;

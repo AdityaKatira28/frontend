@@ -1,14 +1,13 @@
-
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ThreatLevelChart } from './charts/ThreatLevelChart';
-import { BudgetAllocationChart } from './charts/BudgetAllocationChart';
-import { SecurityScoreCard } from './cards/SecurityScoreCard';
-import { MetricsGrid } from './MetricsGrid';
-import { RecentAlerts } from './RecentAlerts';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card';
+import { ThreatLevelChart } from '@/shared/components/charts/ThreatLevelChart';
+import { BudgetAllocationChart } from '@/shared/components/charts/BudgetAllocationChart';
+import { SecurityScoreCard } from '@/shared/components/cards/SecurityScoreCard';
+import { MetricsGrid } from '@/shared/components/MetricsGrid';
+import { RecentAlerts } from '@/shared/components/RecentAlerts';
 import { TrendingUp, Shield, AlertTriangle, DollarSign } from 'lucide-react';
 
-export const OverviewDashboard = () => {
+export const OverviewApp = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">

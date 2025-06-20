@@ -1,11 +1,10 @@
-
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card';
 import { AlertTriangle, Globe, Shield, Target } from 'lucide-react';
-import { ThreatMapVisualization } from './visualizations/ThreatMapVisualization';
-import { ThreatTimelineChart } from './charts/ThreatTimelineChart';
+import { ThreatMapVisualization } from '@/shared/components/visualizations/ThreatMapVisualization';
+import { ThreatTimelineChart } from '@/shared/components/charts/ThreatTimelineChart';
 
-export const ThreatDashboard = () => {
+export const ThreatIntelligenceApp = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
