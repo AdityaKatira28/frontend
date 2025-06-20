@@ -5,6 +5,7 @@ import { Header } from '@/components/dashboard/Header';
 import { OverviewDashboard } from '@/components/dashboard/OverviewDashboard';
 import { ThreatDashboard } from '@/components/dashboard/ThreatDashboard';
 import BudgetOptimizationDashboard from '@/components/dashboard/BudgetOptimizationDashboard';
+import { ComplianceDashboard } from '@/components/dashboard/ComplianceDashboard';
 import { Toaster } from "@/components/ui/toaster";
 
 interface DashboardLayoutProps {
@@ -12,7 +13,7 @@ interface DashboardLayoutProps {
 }
 
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
-  const [activeView, setActiveView] = useState<'overview' | 'threats' | 'budget' | 'recommendations'>('overview');
+  const [activeView, setActiveView] = useState<'overview' | 'threats' | 'budget' | 'compliance' | 'recommendations'>('overview');
 
   const handleToggleAssistant = () => {
     console.log('AI Assistant toggled');
@@ -27,6 +28,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
         return <ThreatDashboard />;
       case 'budget':
         return <BudgetOptimizationDashboard />;
+      case 'compliance':
+        return <ComplianceDashboard />;
       default:
         return <OverviewDashboard />;
     }
