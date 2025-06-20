@@ -5,6 +5,7 @@ import { Button } from '@/shared/components/ui/button';
 import { AlertTriangle, CheckCircle, XCircle, RefreshCw, Shield, TrendingUp, TrendingDown, Activity } from 'lucide-react';
 import { useComplianceData } from '../hooks/useComplianceData';
 import { LoadingSpinner, ErrorMessage } from '@/shared/components/common';
+import { FileUpload } from '../components/FileUpload';
 
 export const ComplianceDashboard: React.FC = () => {
   const { data: complianceData, insights: aiInsights, loading, error, refreshData } = useComplianceData();
@@ -256,6 +257,22 @@ export const ComplianceDashboard: React.FC = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* File Upload Section */}
+      <FileUpload
+        onUploadComplete={(files) => {
+          console.log('Files uploaded successfully:', files);
+          // Optionally refresh compliance data after upload
+          refreshData();
+        }}
+        onUploadError={(error) => {
+          console.error('Upload error:', error);
+        }}
+        acceptedFileTypes={['.pdf', '.csv', '.xlsx', '.json', '.txt', '.xml']}
+        maxFileSize={25}
+        maxFiles={10}
+        uploadEndpoint="/api/v1/compliance/upload"
+      />
     </div>
   );
 };
